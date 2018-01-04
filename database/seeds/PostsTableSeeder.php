@@ -14,7 +14,7 @@ class PostsTableSeeder extends Seeder
     {
         DB::table('posts')->truncate();
 
-        $postsCount = 10;
+        $postsCount = 50;
         factory(App\Post::class, $postsCount)->create();
     }
 }

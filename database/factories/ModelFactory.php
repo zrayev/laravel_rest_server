@@ -20,6 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'api_token' => str_random(60),
     ];
 });
 
@@ -27,6 +28,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
-        'body' => $faker->text(),
+        'body' => $faker->paragraph,
     ];
 });
