@@ -74,4 +74,9 @@ class LoginController extends Controller {
 
         return response()->json(['data' => 'User logged out.'], 200);
     }
+
+    protected function sendFailedLoginResponse(Request $request) {
+        $errors = ['error' => trans('auth.failed')];
+        return response()->json($errors, 422);
+    }
 }

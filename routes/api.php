@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+
 //Use App\Post;
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,8 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')
     ->get('/user', function (Request $request) {
-    return $request->user();
-});
+        return $request->user();
+    });
 
 
 Route::post('register', 'Auth\RegisterController@register');
@@ -24,7 +25,12 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout');
 
 
-Route::group(['middleware' => 'auth:api'], function() {
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('users', 'UserController@index');
+    Route::get('users/{user}', 'UserController@show');
+    Route::post('users', 'UserController@store');
+    Route::put('users/{user}', 'UserController@update');
+    Route::delete('users/{user}', 'UserController@delete');
     Route::get('posts', 'PostController@index');
     Route::get('posts/{post}', 'PostController@show');
     Route::post('posts', 'PostController@store');

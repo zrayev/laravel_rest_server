@@ -24,11 +24,11 @@ class LoginTest extends TestCase
     public function testUserLoginsSuccessfully()
     {
         $user = factory(User::class)->create([
-            'email' => 'testlogin@user.com',
-            'password' => bcrypt('toptal123'),
+            'email' => 'testuser@user.com',
+            'password' => bcrypt('test123'),
         ]);
 
-        $payload = ['email' => 'testlogin@user.com', 'password' => 'toptal123'];
+        $payload = ['email' => 'testuser@user.com', 'password' => 'test123'];
 
         $this->json('POST', 'api/login', $payload)
             ->assertStatus(200)

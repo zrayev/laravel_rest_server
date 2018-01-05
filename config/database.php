@@ -36,7 +36,7 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => '/home/dmitry/works/rest/database/database.sqlite',
+            'database' => __DIR__ . '/database/database.sqlite',
             'prefix' => '',
         ],
 
