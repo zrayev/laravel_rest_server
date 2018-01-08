@@ -30,4 +30,11 @@ class UserController extends Controller {
 
         return response()->json(NULL, 204);
     }
+
+    public function posts(User $user) {
+        return response()->json([
+            ['User' => $user],
+            ['Posts' => $user->posts],
+        ]);
+    }
 }
