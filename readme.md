@@ -1,40 +1,42 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## REST server
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+**Deployment plan:**
 
-## About Laravel
+1. Run `git clone git@github.com:zrayev/laravel_rest_server.git .` in empty folder.
+2. Run `composer install ` to install dependencies.
+3. Run `npm install` to install node modules.
+4. Create new mySql databases:
+   - for local env - rest,
+   - for testing env - rest_test.
+5. Generate app key for local env: `php artisan key:generate` . Configure .env and .env.testing files.
+6. Run `php artisan serve` or create apache2/nginx host for launch project.
+7. Run `composer test` to run unit tests.
+8. Run `php artisan migrate ` and `php artisan db:seed` for create schema and seeds data in local db.
+6. Done.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+**Instruction for REST server:**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- You would use Postman or curl for testing this API (I prefer Postman).
+- You would show API routes in the path `/routes/api.php`.
+- If you use Postman don't forget you would send the data as `x-www-form-urlencoded` for PUT and PATCH request.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+**Examples url:**
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+- POST	`/register`	Register new User.
+- POST	`/login`	User Login.
+- POST	`/logout`	Logout User.
+-
+- GET	`/users`	Retrieves the collection of User resources.
+- GET	`/users/1`	Retrieves a User resource.
+- DELETE	`/users/1`	Removes the User resource.
+-
+- GET	`/posts`	Retrieves the collection of Post resources.
+- GET	`/posts/1`	Retrieves a Post resource.
+- POST	`/posts`	Creates a Post resource.
+- PUT	`/posts/1`	Replaces the Post resource.
+- PATCH	`/posts/1`	Replaces the Post resource.
+- DELETE	`/posts/1`	Removes the Post resource.
+-
+- GET	`/users/1/posts`	Retrieves the collection of Post resources for User id=1.
+- DELETE	`/users/1/posts`	Removes all Posts resource for User id=1.
+- POST	`/users/1/posts`	Creates a Post resource for User id=1.
