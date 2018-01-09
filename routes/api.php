@@ -27,16 +27,24 @@ Route::post('logout', 'Auth\LoginController@logout');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('users', 'UserController@index');
-    Route::get('users/{user}', 'UserController@show');
-    Route::post('users', 'UserController@store');
-    Route::put('users/{user}', 'UserController@update');
-    Route::delete('users/{user}', 'UserController@delete');
+    Route::get('users/{user}', 'UserController@show')->where('user', '[0-9]+');
+    Route::delete('users/{user}', 'UserController@delete')
+        ->where('user', '[0-9]+');
 
     Route::get('posts', 'PostController@index');
-    Route::get('posts/{post}', 'PostController@show');
+    Route::get('posts/{post}', 'PostController@show')->where('post', '[0-9]+');
     Route::post('posts', 'PostController@store');
-    Route::put('posts/{post}', 'PostController@update');
-    Route::delete('posts/{post}', 'PostController@delete');
+    Route::put('posts/{post}', 'PostController@update')
+        ->where('post', '[0-9]+');
+    Route::patch('posts/{post}', 'PostController@updatePatch')
+        ->where('post', '[0-9]+');
+    Route::delete('posts/{post}', 'PostController@delete')
+        ->where('post', '[0-9]+');
 
-    Route::get('/users/{user}/posts', 'UserController@posts');
+    Route::get('/users/{user}/posts', 'UserController@posts')
+        ->where('user', '[0-9]+');
+    Route::delete('/users/{user}/posts', 'UserController@postsDelete')
+        ->where('user', '[0-9]+');
+    Route::post('/users/{user}/posts', 'UserController@postsStore')
+        ->where('user', '[0-9]+');
 });

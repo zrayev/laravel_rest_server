@@ -7,16 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model {
     protected $table = 'posts';
-    protected $guarded = ['slug, user_id'];
-    protected $fillable = ['title', 'body'];
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'user_id',
-    ];
+    protected $fillable = ['title', 'slug', 'body', 'user_id'];
 
     /**
      * @return BelongsTo
@@ -24,5 +15,4 @@ class Post extends Model {
     public function users() {
         return $this->belongsTo(User::class);
     }
-
 }

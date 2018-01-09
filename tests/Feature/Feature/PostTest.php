@@ -17,14 +17,20 @@ class PostTest extends TestCase {
         $payload = [
             'title' => 'Lorem',
             'body' => 'Ipsum',
+            'user_id' => '1',
         ];
 
         $this->json('POST', '/api/posts', $payload, $headers)
             ->assertStatus(200)
-            ->assertJson(['id' => 1, 'title' => 'Lorem', 'body' => 'Ipsum']);
+            ->assertJson([
+                'id' => 1,
+                'title' => 'Lorem',
+                'body' => 'Ipsum',
+                'user_id' => '1',
+            ]);
     }
 
-    public function testsPostsAreUpdatedCorrectly() {
+    public function testsPostsAreUpdatedCorrectlyWithPut() {
         $user = factory(User::class)->create();
         $token = $user->generateToken();
         $headers = ['Authorization' => "Bearer $token"];
@@ -39,6 +45,25 @@ class PostTest extends TestCase {
         ];
 
         $response = $this->json('PUT', '/api/posts/' . $post->id, $payload, $headers)
+            ->assertStatus(200)
+            ->assertJson(['id' => 1, 'title' => 'Lorem', 'body' => 'Ipsum']);
+    }
+
+    public function testsPostsAreUpdatedCorrectlyWithPatch() {
+        $user = factory(User::class)->create();
+        $token = $user->generateToken();
+        $headers = ['Authorization' => "Bearer $token"];
+        $post = factory(Post::class)->create([
+            'title' => 'First Post',
+            'body' => 'First Body',
+        ]);
+
+        $payload = [
+            'title' => 'Lorem',
+            'body' => 'Ipsum',
+        ];
+
+        $response = $this->json('PATCH', '/api/posts/' . $post->id, $payload, $headers)
             ->assertStatus(200)
             ->assertJson(['id' => 1, 'title' => 'Lorem', 'body' => 'Ipsum']);
     }
